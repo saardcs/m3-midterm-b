@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+    td {
+      border-top: 1px solid #888;
+      border-left: 1px solid #888;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      padding: 0;
+    }
+    td:nth-child(3), td:nth-child(6) {
+      border-right: 3px solid #555;
+    }
+    tr:nth-child(3) td, tr:nth-child(6) td {
+      border-bottom: 3px solid #555;
+    }
+    td:last-child {
+      border-right: 1px solid #888;
+    }
+    tr:last-child td {
+      border-bottom: 1px solid #888;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 28px;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+    }
+    input[readonly] {
+      background-color: transparent;
+      font-weight: bold;
+      color: #222;
+      cursor: default;
+    }
+    /* Editable input text should be bluish */
+    input:not([readonly]) {
+      color: #3f7d9b;  /* bluish color for editable inputs */
+    }
+  </style>
+</head>
+<body>
+  <table id="sudoku"></table>
+  <script>
+    const puzzle = [
+      [5, 8, 9, 4, 0, 1, 7, 3, 6],
+      [4, 0, 2, 0, 0, 0, 8, 1, 9],
+      [7, 3, 0, 8, 0, 6, 0, 5, 4],
+      [8, 0, 3, 0, 4, 0, 6, 0, 1],
+      [0, 0, 0, 3, 0, 9, 0, 0, 0],
+      [2, 0, 5, 0, 6, 0, 9, 0, 3],
+      [1, 2, 0, 7, 0, 4, 0, 9, 8],
+      [9, 0, 4, 0, 0, 0, 1, 2, 7],
+      [0, 7, 8, 9, 0, 2, 4, 6, 5]
+    ];
+
+    const table = document.getElementById('sudoku');
+    let html = '';
+
+    for (let i = 0; i < 9; i++) {
+      html += '<tr>';
+      for (let j = 0; j < 9; j++) {
+        const val = puzzle[i][j];
+        const readonlyAttr = val !== 0 ? 'readonly' : '';
+        const displayVal = val !== 0 ? val : '';
+        html += `<td><input type="text" maxlength="1" id="cell-${i}-${j}" value="${displayVal}" ${readonlyAttr}></td>`;
+      }
+      html += '</tr>';
+    }
+
+    table.innerHTML = html;
+
+    function updateBoard() {
+      const board = [];
+      for (let i = 0; i < 9; i++) {
+        const row = [];
+        for (let j = 0; j < 9; j++) {
+          const inputEl = document.getElementById(`cell-${i}-${j}`);
+          const val = inputEl.value;
+          row.push(val ? parseInt(val) || 0 : 0);
+        }
+        board.push(row);
+      }
+      window.parent.postMessage({
+        isStreamlitMessage: true,
+        type: 'streamlit:setComponentValue',
+        value: board
+      }, '*');
+    }
+
+    for(let i=0; i<9; i++) {
+      for(let j=0; j<9; j++) {
+        document.getElementById(`cell-${i}-${j}`).addEventListener('input', updateBoard);
+      }
+    }
+
+    function sendMessage(type, data = {}) {
+      window.parent.postMessage({ isStreamlitMessage: true, type, ...data }, '*');
+    }
+
+    window.addEventListener('message', event => {
+      if (event.data.type === 'streamlit:render') {
+        sendMessage('streamlit:setFrameHeight', { height: document.documentElement.scrollHeight });
+      }
+    });
+
+    sendMessage('streamlit:componentReady', { apiVersion: 1 });
+    sendMessage('streamlit:setFrameHeight', { height: document.documentElement.scrollHeight });
+  </script>
+</body>
+</html>

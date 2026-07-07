@@ -1,2 +1,6 @@
 streamlit
-pandas
+gspread
+google-api-python-client
+networkx
+streamlit_drawable_canvas
+matplotlib
