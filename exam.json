@@ -19,7 +19,7 @@
       "items": [
         {
           "type": "instruction",
-          "text": "Suppose that the four-character code has the following restrictions:\n- Numbers and letters\n- Uppercase and lowercase letters\n- Cannot repeat characters",
+          "text": "Suppose that the five-character code has the following restrictions:\n- Numbers and letters\n- Uppercase and lowercase letters\n- Cannot repeat characters",
           "image": "images/5char.png"
         },
         {
@@ -84,7 +84,7 @@
         },
         {
           "type": "instruction",
-          "text": "Suppose that the four-character code has the following restrictions:\n- Numbers only\n- Cannot repeat characters",
+          "text": "Suppose that the five-character code has the following restrictions:\n- Numbers only\n- Cannot repeat characters",
           "image": "images/5char.png"
         },
         {
@@ -149,7 +149,7 @@
         },
         {
           "type": "instruction",
-          "text": "Suppose that the four-character code has the following restrictions:\n- Numbers and letters\n- Uppercase letters ONLY",
+          "text": "Suppose that the five-character code has the following restrictions:\n- Numbers and letters\n- Uppercase letters ONLY",
           "image": "images/5char.png"
         },
         {
