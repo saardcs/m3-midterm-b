@@ -61,7 +61,7 @@
         {
           "type": "mcq",
           "id": "q5",
-          "text": "5. How many possible characters are there for the fourth spot in the password?",
+          "text": "5. How many possible characters are there for the fifth spot in the password?",
           "options": [
             "60",
             "58",
@@ -126,7 +126,7 @@
         {
           "type": "mcq",
           "id": "q10",
-          "text": "10. How many possible characters are there for the fourth spot in the password?",
+          "text": "10. How many possible characters are there for the fifth spot in the password?",
           "options": [
             "60",
             "10",
@@ -191,7 +191,7 @@
         {
           "type": "mcq",
           "id": "q15",
-          "text": "15. How many possible characters are there for the fourth spot in the password?",
+          "text": "15. How many possible characters are there for the fifth spot in the password?",
           "options": [
             "26",
             "22",
